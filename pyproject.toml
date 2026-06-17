@@ -1,17 +1,11 @@
 [build-system]
-requires = ["setuptools", "wheel"]
+requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
+
 
 [project]
 name = "netbox_better_templates"
-version = "1.0.2"
-description = "Adds some functionality to netbox templates and config render."
-readme = "README.md"
-license = { file = "LICENSE" }
-authors = [
-    { name = "Radin-System", email = "technical@rsto.ir" }
-]
-keywords = ["python", "netbox", "provisioning", "template", "jinja", "jinja2"]
+dynamic = ["version", "description", "readme", "authors", "keywords"]
 classifiers = [
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: MIT License",
@@ -19,7 +13,42 @@ classifiers = [
 ]
 dependencies = []
 requires-python = ">=3.11"
+readme = "README.md"
+license = {file = "LICENSE"}
+
+
+[tool.setuptools.dynamic]
+version = {attr = "netbox_better_templates.__version__"}
+description = {attr = "netbox_better_templates.__description__"}
+authors = {attr = "netbox_better_templates.__authors__"}
+keywords = {attr = "netbox_better_templates.__keywords__"}
+
+
+[tool.setuptools]
+include-package-data = true
+
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["netbox_better_templates*", "netbox_better_templates.*"]
+exclude = ["test*", "dev*", "scripts*"]
+
+
+[tool.setuptools.package-data]
+netbox_better_templates = [
+    "README.md",
+    "LICENSE",
+]
+
+
+[tool.setuptools.exclude-package-data]
+netbox_better_templates = [
+    "__pycache__/*",
+    "*.pyc",
+    "*.so"
+]
+
 
 [project.urls]
-Homepage = "https://github.com/Radin-System/netbox-better-templates"
-BugTracker = "https://github.com/Radin-System/netbox-better-templates/issues"
+Homepage = "https://github.com/devixa-tech/netbox-better-templates"
+BugTracker = "https://github.com/devixa-tech/netbox-better-templates/issues"
